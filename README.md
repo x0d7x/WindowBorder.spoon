@@ -14,7 +14,9 @@ git clone https://github.com/x0d7x/WindowBorder.spoon
 ## Usage
 
 edit `~/.hammerspoon/init.lua`
+
 Copy and paste the following lines:
+
 hs.loadSpoon("WindowBorder")
 
 spoon.WindowBorder.borderColor = "#FF8800"
