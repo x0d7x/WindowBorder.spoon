@@ -1,6 +1,8 @@
 --- === WindowBorder ===
 ---
---- Adds a configurable border around the focused window.
+--- Adds a configurable border around the focused *standard* window.
+--- Excludes floating/system/utility windows automatically.
+---
 --- Usage:
 ---   local wb = hs.loadSpoon("WindowBorder")
 ---   wb.borderWidth  = 6
@@ -13,14 +15,14 @@ obj.__index = obj
 
 -- ▸ Metadata ------------------------------------------------------
 obj.name = "WindowBorder"
-obj.version = "1.0"
+obj.version = "1.1" -- ⬆ updated
 obj.author = "d7man <di7@hotmail.com>"
 obj.homepage = "https://github.com/x0d7x/WindowBorder.spoon"
 
 -- ▸ Default Settings ---------------------------------------------
-obj.borderWidth = 4 -- thickness in px
+obj.borderWidth = 4
 obj.borderColor = { red = 0.20, green = 0.55, blue = 1.00, alpha = 0.90 }
-obj.cornerRadius = 6 -- rounded‑rect radius
+obj.cornerRadius = 6
 obj.windowLevel = "overlay" -- or "assistiveTechHigh"
 
 -- ▸ Internals -----------------------------------------------------
@@ -51,7 +53,8 @@ end
 
 local function _updateBorder(self)
 	local win = hs.window.focusedWindow()
-	if not win or not win:isVisible() then
+	-- Skip if no window, not visible, or NOT a standard window (dialogs, floaters, system, etc.)
+	if not win or not win:isVisible() or not win:isStandard() then
 		_hideBorder(self)
 		return
 	end
