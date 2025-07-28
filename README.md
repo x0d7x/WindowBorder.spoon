@@ -17,6 +17,7 @@ edit `~/.hammerspoon/init.lua`
 
 Copy and paste the following lines:
 
+```lua
 hs.loadSpoon("WindowBorder")
 
 spoon.WindowBorder.borderColor = "#FF8800"
@@ -26,6 +27,7 @@ spoon.WindowBorder.borderWidth = 6
 spoon.WindowBorder.cornerRadius = 10
 
 spoon.WindowBorder:start()
+```
 
 > [!NOTE]
 > to disable the border, call spoon.WindowBorder:stop()
