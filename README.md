@@ -2,6 +2,8 @@
 
 **Boost your macOS productivity and visual focus with WindowBorder.spoon!** This powerful Hammerspoon module adds a highly customizable, colored border around your currently focused application window, making it effortless to track your active workspace.
 
+https://github.com/user-attachments/assets/55713c7f-b0df-4d57-a5f1-cedaf2de51af
+
 ## 🚀 Features & Benefits
 
 *   **Instant Visual Focus:** Clearly identify your active window at a glance, reducing distractions and improving workflow.
