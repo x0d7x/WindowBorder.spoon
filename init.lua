@@ -1,10 +1,11 @@
---- === WindowBorder ===
+--- === OutlineX ===
+
 ---
 --- Adds a configurable border around the focused *standard* window.
 --- Excludes floating/system/utility windows automatically.
 ---
 --- Usage:
----   local wb = hs.loadSpoon("WindowBorder")
+---   ---   local wb = hs.loadSpoon("OutlineX")
 ---   wb.borderWidth  = 6
 ---   wb.borderColor  = "#FF8800"      -- HEX string or RGBA table
 ---   wb.cornerRadius = 10
@@ -14,10 +15,10 @@ local obj = {}
 obj.__index = obj
 
 -- ▸ Metadata ------------------------------------------------------
-obj.name = "WindowBorder"
+obj.name = "OutlineX"
 obj.version = "1.1" -- ⬆ updated
 obj.author = "d7man <di7@hotmail.com>"
-obj.homepage = "https://github.com/x0d7x/WindowBorder.spoon"
+obj.homepage = "https://github.com/x0d7x/outlineX-hs"
 
 -- ▸ Default Settings ---------------------------------------------
 obj.borderWidth = 4
