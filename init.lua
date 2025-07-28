@@ -1,35 +1,38 @@
---- === OutlineX ===
-
+--- === OutlineX_hs ===
 ---
 --- Adds a configurable border around the focused *standard* window.
---- Excludes floating/system/utility windows automatically.
+--- Excludes floating / system / utility windows automatically.
 ---
 --- Usage:
----   ---   local wb = hs.loadSpoon("OutlineX")
----   wb.borderWidth  = 6
----   wb.borderColor  = "#FF8800"      -- HEX string or RGBA table
----   wb.cornerRadius = 10
----   wb:start()
+---   local ox = hs.loadSpoon("OutlineX_hs")
+---   ox.borderWidth  = 6
+---   ox.borderColor  = "#FF8800"      -- HEX string or RGBA table
+---   ox.cornerRadius = 10
+---   ox:start()
 
-local obj = {}
-obj.__index = obj
+-------------------------------------------------------------------
+-- Spoon Object
+-------------------------------------------------------------------
+local outlineX_hs = {}
+outlineX_hs.__index = outlineX_hs
 
 -- ▸ Metadata ------------------------------------------------------
-obj.name = "OutlineX"
-obj.version = "1.1" -- ⬆ updated
-obj.author = "d7man <di7@hotmail.com>"
-obj.homepage = "https://github.com/x0d7x/outlineX-hs"
+outlineX_hs.name = "OutlineX_hs"
+outlineX_hs.version = "1.2"
+outlineX_hs.author = "d7man <di7@hotmail.com>"
+outlineX_hs.homepage = "https://github.com/x0d7x/outlineX-hs"
 
 -- ▸ Default Settings ---------------------------------------------
-obj.borderWidth = 4
-obj.borderColor = { red = 0.20, green = 0.55, blue = 1.00, alpha = 0.90 }
-obj.cornerRadius = 6
-obj.windowLevel = "overlay" -- or "assistiveTechHigh"
+outlineX_hs.borderWidth = 4
+outlineX_hs.borderColor = { red = 0.20, green = 0.55, blue = 1.00, alpha = 0.90 }
+outlineX_hs.cornerRadius = 6
+outlineX_hs.windowLevel = "overlay" -- or "assistiveTechHigh"
+outlineX_hs.borderAlpha = nil -- optional override when using HEX
 
 -- ▸ Internals -----------------------------------------------------
-obj._border = nil
-obj._winFilter = nil
-obj._spaceWatcher = nil
+outlineX_hs._border = nil
+outlineX_hs._winFilter = nil
+outlineX_hs._spaceWatcher = nil
 
 -------------------------------------------------------------------
 -- Helpers
@@ -40,7 +43,7 @@ local function _hideBorder(self)
 	end
 end
 
---- Convert "#RRGGBB" or "#RGB" to rgba table {red=,green=,blue=,alpha=}
+--- Convert "#RRGGBB" or "#RGB" to {red,green,blue,alpha}
 local function hex2rgba(hex, alpha)
 	hex = hex:gsub("#", "")
 	if #hex == 3 then -- expand #RGB → #RRGGBB
@@ -52,9 +55,9 @@ local function hex2rgba(hex, alpha)
 	return { red = r, green = g, blue = b, alpha = alpha or 1 }
 end
 
+--- Draw / move border
 local function _updateBorder(self)
 	local win = hs.window.focusedWindow()
-	-- Skip if no window, not visible, or NOT a standard window (dialogs, floaters, system, etc.)
 	if not win or not win:isVisible() or not win:isStandard() then
 		_hideBorder(self)
 		return
@@ -79,7 +82,7 @@ local function _updateBorder(self)
 	end
 end
 
-function obj:start()
+function outlineX_hs:start()
 	if type(self.borderColor) == "string" then
 		self.borderColor = hex2rgba(self.borderColor, self.borderAlpha or 1)
 	elseif type(self.borderColor) == "table" and self.borderColor.hex then
@@ -113,13 +116,13 @@ function obj:start()
 	return self
 end
 
-function obj:stop()
+function outlineX_hs:stop()
 	self:_stopWatchers()
 	_hideBorder(self)
 	return self
 end
 
-function obj:_stopWatchers()
+function outlineX_hs:_stopWatchers()
 	if self._winFilter then
 		self._winFilter:unsubscribeAll()
 		self._winFilter = nil
@@ -130,4 +133,4 @@ function obj:_stopWatchers()
 	end
 end
 
-return obj
+return outlineX_hs
