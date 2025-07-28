@@ -42,16 +42,19 @@ After installation, you need to load and configure outlineX-hs in your Hammerspo
 
    ```lua
    -- Load the OutlineX Spoon
-   hs.loadSpoon("OutlineX")
+   local ox = hs.loadSpoon("OutlineX_hs")
 
    -- Configure the border appearance (optional, defaults are applied if not set)
-   spoon.OutlineX.borderColor = "#FF8800" -- Example: Vibrant Orange
-   spoon.OutlineX.borderWidth = 6         -- Example: 6 pixels thick
-   spoon.OutlineX.cornerRadius = 10       -- Example: Rounded corners
+   ox.borderWidth = 6
+   ox.borderColor = "#FF8800"
+   ox.borderAlpha = 1
+   ox.cornerRadius = 14
 
    -- Start the OutlineX functionality
-   spoon.OutlineX:start()
+   ox:start()
    ```
+
+   **Note:** If you prefer to configure `OutlineX_hs` directly within your `init.lua` without using the `spoon` global, you can use the `local ox = hs.loadSpoon("OutlineX_hs")` approach as shown above.
 
    - **`spoon.OutlineX.borderColor`**: Sets the color of the border. Use a hex color code.
    - **`spoon.OutlineX.borderWidth`**: Sets the thickness of the border in pixels.
@@ -64,7 +67,7 @@ After installation, you need to load and configure outlineX-hs in your Hammerspo
 To temporarily disable the window border without removing the configuration, you can call:
 
 ```lua
-spon.OutlineX:stop()
+ox:stop()
 ```
 
 ### ▶️ Restarting the Border
@@ -72,7 +75,7 @@ spon.OutlineX:stop()
 If you've stopped the border and wish to restart it, simply call:
 
 ```lua
-spon.OutlineX:start()
+ox:start()
 ```
 
 ## 🤝 Contributing
